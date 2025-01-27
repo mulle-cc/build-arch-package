@@ -13,9 +13,9 @@ INPUT_OUTDIR="$(eval echo $INPUT_OUTDIR)"
 # Get PKGBUILD dir
 PKGBUILD_DIR=$(dirname $(readlink -f $INPUT_PKGBUILD))
 
-pacman -Syu --noconfirm --noprogressbar --needed base-devel devtools btrfs-progs dbus sudo
+pacman -Syu --noconfirm --noprogressbar --needed base-devel devtools btrfs-progs util-linux sudo
 
-dbus-uuidgen --ensure=/etc/machine-id
+sudo uuidgen > /etc/machine-id
 
 sed -i "s|MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
 useradd -m user || true
