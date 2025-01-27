@@ -15,7 +15,7 @@ PKGBUILD_DIR=$(dirname $(readlink -f $INPUT_PKGBUILD))
 
 pacman -Syu --noconfirm --noprogressbar --needed base-devel devtools btrfs-progs util-linux sudo
 
-sudo uuidgen > /etc/machine-id
+uuidgen | tr -d '-' | sudo tee /etc/machine-id
 
 sed -i "s|MAKEFLAGS=.*|MAKEFLAGS=-j$(nproc)|" /etc/makepkg.conf
 useradd -m user || true
